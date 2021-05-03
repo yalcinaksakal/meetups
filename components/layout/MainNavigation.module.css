@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #77002e;
-  padding: 0 10%;
+  padding: 0 20px;
 }
 
 .logo {
@@ -36,4 +36,23 @@
 .header a:active,
 .header a.active {
   color: white;
+}
+@media (max-width: 600px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+  .header a {
+    font-size: 1rem;
+  }
+  .header li {
+    margin-left: 0.8rem;
+  }
+}
+@media (max-width: 400px) {
+  .logo {
+    font-size: 1rem;
+  }
+  .header a {
+    font-size: 0.7rem;
+  }
 }
