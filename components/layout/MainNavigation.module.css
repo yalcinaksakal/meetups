@@ -19,40 +19,40 @@
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: row;
   align-items: baseline;
 }
 
 .header li {
   margin-left: 3rem;
+  color: rgb(126, 189, 252);
 }
 
 .header a {
   text-decoration: none;
   font-size: 1.5rem;
-  color: rgb(126, 189, 252);
+  color: inherit;
 }
 
-.header a:hover,
-.header a:active,
-.header a.active {
+.header li:hover,
+.header li:active,
+.header li.active {
   color: white;
 }
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .logo {
     font-size: 1.2rem;
   }
   .header a {
     font-size: 1rem;
   }
+
   .header li {
     margin-left: 0.8rem;
   }
 }
 @media (max-width: 400px) {
-  .logo {
-    font-size: 1rem;
-  }
-  .header a {
-    font-size: 0.7rem;
+  .header ul {
+    flex-direction: column;
   }
 }
