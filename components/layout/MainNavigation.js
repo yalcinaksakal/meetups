@@ -8,10 +8,14 @@ function MainNavigation() {
       <nav>
         <ul>
           <li>
-            <Link href="/">Meetups</Link>
+            <Link activeClassName={classes.acitve} href="/">
+              Meetups
+            </Link>
           </li>
           <li>
-            <Link href="/new-meetup">Add Meetup</Link>
+            <Link activeClassName={classes.acitve} href="/new-meetup">
+              Add Meetup
+            </Link>
           </li>
         </ul>
       </nav>
