@@ -16,8 +16,6 @@ const MeetupDetails = props => {
 };
 
 export async function getStaticPaths() {
-  // fallback false: all supported paths are declared in return statement
-
   const client = await MongoClient.connect(
     "mongodb+srv://ya:qwe123zx@cluster0.kxotm.mongodb.net/meetups?retryWrites=true&w=majority"
   );
@@ -28,8 +26,11 @@ export async function getStaticPaths() {
 
   //dont forget to close connection
   client.close();
+  // fallback false: all supported paths are declared in return statement
+  // true:returns empty page immediately and once prerendering is done returns fullfilled page
+  //blocking:user will see nothing until page is regenerated
   return {
-    fallback: false,
+    fallback: "blocking",
     paths: meetups.map(meetup => ({
       params: { meetupId: meetup._id.toString() },
     })),
