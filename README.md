@@ -19,6 +19,8 @@ context
 for dynamic routes
 getStaticPaths
 
-API routes allow to build api endpoints as part of the project. Should be in the ../pages/api folder. file names will be treated as routes like files in pages folder
+API routes allow to build api endpoints as part of the project. Should be in the ../pages/api folder. file names will be treated as routes like files in pages folder.
+Any file inside the folder pages/api is mapped to /api/\* and will be treated as an API endpoint instead of a page. They are server-side only bundles and won't increase your client-side bundle size.
 
-MongoClient.connetc("..")
+MongoClient
+ObjectId

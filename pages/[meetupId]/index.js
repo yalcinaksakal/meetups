@@ -1,5 +1,6 @@
 //our-domain/meetupId
 
+import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 const MeetupDetails = props => {
   return <MeetupDetail {...props.meetupData} />;
@@ -7,24 +8,48 @@ const MeetupDetails = props => {
 
 export async function getStaticPaths() {
   // fallback false: all supported paths are declared in return statement
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://ya:qwe123zx@cluster0.kxotm.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  //return just _id
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+
+  //dont forget to close connection
+  client.close();
   return {
     fallback: false,
-    paths: [{ params: { meetupId: "m1" } }, { params: { meetupId: "m2" } }],
+    paths: meetups.map(meetup => ({
+      params: { meetupId: meetup._id.toString() },
+    })),
+    // paths: [{ params: { meetupId: "m1" } }, { params: { meetupId: "m2" } }],
   };
 }
 export async function getStaticProps(context) {
-  const id = context.params.meetupId;
+  const { meetupId } = context.params;
   //since this function is called on server side, log will be observed there too
-  console.log(id);
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://ya:qwe123zx@cluster0.kxotm.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  //return just _id
+  const meetup = await meetupsCollection.findOne({ _id: ObjectId(meetupId) });
+
+  //dont forget to close connection
+  client.close();
+
   return {
     props: {
       meetupData: {
-        id,
-        title: "A first meetup",
-        image:
-          "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZG9ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-        address: "some adress 1, 12345 City",
-        description: "Test meetup 1",
+        id: meetupId,
+        title: meetup.title,
+        image: meetup.image,
+        address: meetup.address,
+        description: meetup.description,
       },
     },
   };

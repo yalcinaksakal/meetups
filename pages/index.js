@@ -4,7 +4,6 @@
 import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
 
-
 const HomePage = props => {
   return <MeetupList meetups={props.meetups} />;
 };
@@ -20,17 +19,21 @@ export async function getStaticProps() {
   );
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
-  const meetups = await (await meetupsCollection.find().toArray()).map(
-    meetup => {
-      return { ...meetup, _id: meetup._id.toString() };
-    }
-  );
+  const meetups = await meetupsCollection.find().toArray();
 
+  client.close();
   // or read  data from db or file system
 
   //revalidate property:use it when data changes are frequent. waits 10 secs to regenerate, and return static page with new data
 
-  return { props: { meetups }, revalidate: 10 };
+  return {
+    props: {
+      meetups: meetups.map(meetup => {
+        return { ...meetup, _id: meetup._id.toString() };
+      }),
+    },
+    revalidate: 10,
+  };
 }
 
 // 2nd way
