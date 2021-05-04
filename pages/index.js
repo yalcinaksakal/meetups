@@ -3,9 +3,18 @@
 //next js will detect MongoClien will be used on server side and wont import it on client side. Smart feature
 import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
-
+import Head from "next/head";
 const HomePage = props => {
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <>
+      <Head>
+        <title>Meetups</title>
+
+        <meta name="description" content="Browse a list of acitve meetups" />
+      </Head>
+      <MeetupList meetups={props.meetups} />
+    </>
+  );
 };
 
 //getStaticProps works on only pages.
@@ -32,7 +41,7 @@ export async function getStaticProps() {
         return { ...meetup, _id: meetup._id.toString() };
       }),
     },
-    revalidate: 10,
+    // revalidate: 10,
   };
 }
 

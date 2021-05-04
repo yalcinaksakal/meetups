@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import NewMeetupForm from "../../components/meetups/NewMeetupForm";
 import Spinner from "../../components/ui/Spinner";
-
+import Head from "next/head";
 const NewMeetupPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState({ status: false, msg: "" });
   const addMeetupHandler = async meetupData => {
     setIsLoading({ status: true, msg: "Loading" });
-    const response = await fetch("/api/new-meetup", {
+    await fetch("/api/new-meetup", {
       method: "POST",
       body: JSON.stringify(meetupData),
       headers: { "Content-Type": "application/json" },
@@ -27,7 +27,13 @@ const NewMeetupPage = () => {
       {isLoading.status && <Spinner />}
     </>
   ) : (
-    <NewMeetupForm onAddMeetup={addMeetupHandler} />
+    <>
+      <Head>
+        <title>Add a new meetup</title>
+        <meta name="description" content="Add a new meetup" />
+      </Head>
+      <NewMeetupForm onAddMeetup={addMeetupHandler} />
+    </>
   );
 };
 

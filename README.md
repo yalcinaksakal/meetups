@@ -24,3 +24,5 @@ Any file inside the folder pages/api is mapped to /api/\* and will be treated as
 
 MongoClient
 ObjectId
+
+import Head from "next/head"; add dynamic metadata to each page
