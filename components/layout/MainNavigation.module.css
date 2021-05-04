@@ -6,6 +6,9 @@
   justify-content: space-between;
   background-color: dodgerblue;
   padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .logo {

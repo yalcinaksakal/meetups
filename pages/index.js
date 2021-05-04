@@ -21,8 +21,26 @@ const DummyData = [
   },
 ];
 
-const HomePage = () => {
-  return <MeetupList meetups={DummyData} />;
+const HomePage = props => {
+  return <MeetupList meetups={props.meetups} />;
 };
+
+//getStaticProps works on only pages.
+//dring building process on server side it is called and executed.
+//never ends up in client side and execute there
+export async function getStaticProps() {
+  // fetch data
+  // or read  data from db or file system
+
+  //revalidate property:use it when data changes are frequent. waits 10 secs to regenerate, and return static page with new data
+  return { props: { meetups: DummyData }, revalidate: 10 };
+}
+// 2nd way
+// export async function getServerSideProps(context) {
+//   const req = context.req;
+//   const res = context.res;
+
+//   return { props: { meetups: DummyData } };
+// }
 
 export default HomePage;
