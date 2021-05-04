@@ -26,3 +26,6 @@ MongoClient
 ObjectId
 
 import Head from "next/head"; add dynamic metadata to each page
+
+
+https://next-js-2-tan.vercel.app/
