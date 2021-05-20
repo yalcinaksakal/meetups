@@ -1,3 +1,4 @@
+import Fav from "../ui/Fav";
 import classes from "./MeetupDetail.module.css";
 
 const MeetpDetail = props => {
@@ -7,6 +8,7 @@ const MeetpDetail = props => {
       <h1>{props.title}</h1>
       <address>{props.address}</address>
       <p>{props.description}</p>
+      <Fav isFav={props.isFav} meetUpId={props.id} />
     </section>
   );
 };

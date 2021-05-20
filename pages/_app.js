@@ -25,6 +25,10 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <link rel="icon" href="/logo.png" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
+        />
       </Head>
       <Layout>{isLoading ? <Spinner /> : <Component {...pageProps} />}</Layout>
     </>

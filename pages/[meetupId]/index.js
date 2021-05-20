@@ -60,6 +60,7 @@ export async function getStaticProps(context) {
         image: meetup.image,
         address: meetup.address,
         description: meetup.description,
+        isFav: meetup.isFav,
       },
     },
   };
