@@ -34,14 +34,14 @@ export async function getStaticProps() {
   // or read  data from db or file system
 
   //revalidate property:use it when data changes are frequent. waits 10 secs to regenerate, and return static page with new data
-
+  console.log("static props");
   return {
     props: {
       meetups: meetups.map(meetup => {
         return { ...meetup, _id: meetup._id.toString() };
       }),
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 }
 

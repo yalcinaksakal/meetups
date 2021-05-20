@@ -1,5 +1,5 @@
 // url: /api/new-meetup
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
@@ -8,10 +8,21 @@ async function handler(req, res) {
     );
     const db = client.db();
     const meetupsCollection = db.collection("meetups");
-    const result = await meetupsCollection.insertOne(data);
-    console.log(result);
+    if (data.type === "update") {
+      console.log(data);
+      meetupsCollection.updateOne(
+        { _id: ObjectId(data.id) },
+        { $set: { isFav: data.isFav } }
+      );
+      res
+        .status(201)
+        .json({ message: `${data.isFav ? "Added to" : "Removed from"} favs.` });
+    } else {
+      const result = await meetupsCollection.insertOne(data);
+      console.log(result);
+      res.status(201).json({ message: "Meetup inserted." });
+    }
     client.close();
-    res.status(201).json({ message: "Meetup inserted." });
   }
 }
 
