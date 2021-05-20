@@ -12,6 +12,9 @@ function MainNavigation() {
           <li className={router.pathname === "/" ? classes.active : ""}>
             <Link href="/">Meetups</Link>
           </li>
+          <li className={router.pathname === "/favs" ? classes.active : ""}>
+            <Link href="/favs">Favs</Link>
+          </li>
           <li
             className={router.pathname === "/new-meetup" ? classes.active : ""}
           >
