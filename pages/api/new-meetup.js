@@ -10,10 +10,11 @@ async function handler(req, res) {
     const meetupsCollection = db.collection("meetups");
     if (data.type === "update") {
       console.log(data);
-      meetupsCollection.updateOne(
+      const result = await meetupsCollection.updateOne(
         { _id: ObjectId(data.id) },
         { $set: { isFav: data.isFav } }
       );
+      console.log(result);
       res
         .status(201)
         .json({ message: `${data.isFav ? "Added to" : "Removed from"} favs.` });

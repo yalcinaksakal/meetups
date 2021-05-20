@@ -19,9 +19,7 @@ export async function getStaticProps() {
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
   //return just _id
-  const favMeetups = await await meetupsCollection
-    .find({ isFav: true })
-    .toArray();
+  const favMeetups = await meetupsCollection.find({ isFav: true }).toArray();
 
   //dont forget to close connection
   client.close();
