@@ -18,8 +18,8 @@ const HomePage = props => {
 };
 
 //getStaticProps works on only pages.
-//dring building process on server side it is called and executed.
-//never ends up in client side and execute there
+//during building process on server side it is called and executed.
+//never ends up in client side and executes there
 export async function getStaticProps() {
   // fetch data
   //since this function is called on server side no need to fetch data. directly get them.

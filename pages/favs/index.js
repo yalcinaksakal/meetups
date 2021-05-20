@@ -1,13 +1,18 @@
 //our-domain/favs
 
 import { MongoClient } from "mongodb";
+import { useState } from "react";
 import MeetupList from "../../components/meetups/MeetupList";
 
 const FavsPage = props => {
-  return <MeetupList meetups={props.favMeetups} />;
+  const [favs, setFavs] = useState(props.favMeetups);
+  const removeFromList = id => {
+    setFavs(prevFavs => prevFavs.filter(fav => fav._id !== id));
+  };
+  return <MeetupList meetups={favs} favPageHandler={removeFromList} />;
 };
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const client = await MongoClient.connect(
     "mongodb+srv://ya:qwe123zx@cluster0.kxotm.mongodb.net/meetups?retryWrites=true&w=majority"
   );
@@ -25,6 +30,7 @@ export async function getStaticProps(context) {
     props: {
       favMeetups: favMeetups.map(fav => ({ ...fav, _id: fav._id.toString() })),
     },
+    revalidate: 1,
   };
 }
 

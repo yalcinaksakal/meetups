@@ -2,7 +2,7 @@ import { useState } from "react";
 import favHandler from "../../helper/favHandler";
 
 function Fav(props) {
-  const [isFav, setIsFAv] = useState(props.isFav);
+  const [isFav, setIsFav] = useState(props.isFav);
   return (
     <i
       title={`${props.isFav ? "Remove from" : "Add to"} favs`}
@@ -15,7 +15,8 @@ function Fav(props) {
       className={`${isFav ? "fas" : "far"} fa-heart`}
       onClick={() => {
         favHandler(props.meetUpId, !isFav);
-        setIsFAv(prevState => !prevState);
+        setIsFav(prevState => !prevState);
+        if (props.favPageHandler) props.favPageHandler(props.meetUpId);
       }}
     ></i>
   );

@@ -13,6 +13,7 @@ function MeetupList(props) {
             title={meetup.title}
             address={meetup.address}
             isFav={meetup.isFav}
+            favPageHandler={props.favPageHandler}
           />
         ))
       ) : (

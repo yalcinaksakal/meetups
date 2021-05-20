@@ -9,7 +9,6 @@ function MeetupItem(props) {
     router.push("/" + props.id);
   };
 
-
   return (
     <li className={classes.item}>
       <Card>
@@ -23,7 +22,11 @@ function MeetupItem(props) {
         <div className={classes.actions}>
           <button onClick={showDetailsHandler}>Details</button>
         </div>
-        <Fav isFav={props.isFav}  meetUpId={props.id} />
+        <Fav
+          isFav={props.isFav}
+          meetUpId={props.id}
+          favPageHandler={props.favPageHandler}
+        />
       </Card>
     </li>
   );
