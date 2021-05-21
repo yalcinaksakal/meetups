@@ -4,7 +4,19 @@
 import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
 import Head from "next/head";
+import { useDispatch, useSelector } from "react-redux";
+import { meetupsSliceActions } from "../store/meetups-slice";
+import { useEffect } from "react";
 const HomePage = props => {
+  const dispatch = useDispatch();
+  const { meetups } = useSelector(state => state.meetups);
+  useEffect(() => {
+    if (!meetups.length && props.meetups) {
+      dispatch(meetupsSliceActions.setMeetups(props.meetups));
+    }
+  }, []);
+
+  // if (props.meetups) dispatch(meetupsSliceActions.setMeetups(props.meetups));
   return (
     <>
       <Head>
@@ -12,7 +24,7 @@ const HomePage = props => {
 
         <meta name="description" content="Browse a list of acitve meetups" />
       </Head>
-      <MeetupList meetups={props.meetups} />
+      <MeetupList meetups={meetups} />
     </>
   );
 };

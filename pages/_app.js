@@ -4,6 +4,8 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Spinner from "../components/ui/Spinner";
+import { Provider } from "react-redux";
+import store from "../store/index";
 function MyApp({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -22,7 +24,7 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <>
+    <Provider store={store}>
       <Head>
         <link rel="icon" href="/logo.png" />
         <link
@@ -31,7 +33,7 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Layout>{isLoading ? <Spinner /> : <Component {...pageProps} />}</Layout>
-    </>
+    </Provider>
   );
 }
 
