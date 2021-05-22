@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
+import Spinner from "../ui/Spinner";
 import MeetupItem from "./MeetupItem";
 import classes from "./MeetupList.module.css";
 
 function MeetupList(props) {
+  const { isLoaded } = useSelector(state => state.meetups);
   return (
     <ul className={classes.list}>
       {props.meetups.length ? (
@@ -15,8 +18,10 @@ function MeetupList(props) {
             isFav={meetup.isFav}
           />
         ))
-      ) : (
+      ) : isLoaded ? (
         <p>No meetups added yet.</p>
+      ) : (
+        <Spinner />
       )}
     </ul>
   );
