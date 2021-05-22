@@ -6,9 +6,11 @@ import { useRouter } from "next/router";
 import Spinner from "../components/ui/Spinner";
 import { Provider } from "react-redux";
 import store from "../store/index";
+
 function MyApp({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
   useEffect(() => {
     const start = () => setIsLoading(true);
     const end = () => setIsLoading(false);

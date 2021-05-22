@@ -22,11 +22,7 @@ function MeetupItem(props) {
         <div className={classes.actions}>
           <button onClick={showDetailsHandler}>Details</button>
         </div>
-        <Fav
-          isFav={props.isFav}
-          meetUpId={props.id}
-          favPageHandler={props.favPageHandler}
-        />
+        <Fav isFav={props.isFav} meetUpId={props.id} />
       </Card>
     </li>
   );

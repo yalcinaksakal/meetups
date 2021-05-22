@@ -8,7 +8,7 @@ const MeetpDetail = props => {
       <h1>{props.title}</h1>
       <address>{props.address}</address>
       <p>{props.description}</p>
-      <Fav isFav={props.isFav} meetUpId={props.id} />
+      <Fav isFav={props.isFav} meetUpId={props._id} />
     </section>
   );
 };

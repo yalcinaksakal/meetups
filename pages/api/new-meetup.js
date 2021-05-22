@@ -18,10 +18,17 @@ async function handler(req, res) {
       res
         .status(201)
         .json({ message: `${data.isFav ? "Added to" : "Removed from"} favs.` });
-    } else {
+    } else if (data.type === "new") {
       const result = await meetupsCollection.insertOne(data);
       console.log(result);
       res.status(201).json({ message: "Meetup inserted." });
+    } else {
+      const result = await (
+        await meetupsCollection.find().toArray()
+      ).map(meetup => ({ ...meetup, _id: meetup._id.toString() }));
+
+      console.log(result);
+      res.status(201).json({ meetups: result });
     }
     client.close();
   }

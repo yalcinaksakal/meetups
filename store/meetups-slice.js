@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   meetups: [],
+  isLoaded: false,
 };
 
 const meetupsSlice = createSlice({
@@ -9,9 +10,15 @@ const meetupsSlice = createSlice({
   initialState,
   reducers: {
     addMeetup(state, action) {},
-    toogleFav(state, action) {},
+    toogleFav(state, action) {
+      const index = state.meetups.findIndex(
+        meetup => meetup._id === action.payload
+      );
+      state.meetups[index].isFav = !state.meetups[index].isFav;
+    },
     setMeetups(state, action) {
       state.meetups = [...action.payload];
+      state.isLoaded = true;
     },
   },
 });

@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import favHandler from "../../helper/favHandler";
+import { meetupsSliceActions } from "../../store/meetups-slice";
 
 function Fav(props) {
-  const [isFav, setIsFav] = useState(props.isFav);
+  const dispatch = useDispatch();
+  const toggleFavHandler = () => {
+    dispatch(meetupsSliceActions.toogleFav(props.meetUpId));
+    favHandler(props.meetUpId, !props.isFav);
+  };
+
   return (
     <i
       title={`${props.isFav ? "Remove from" : "Add to"} favs`}
@@ -12,12 +18,8 @@ function Fav(props) {
         margin: "1rem",
         cursor: "pointer",
       }}
-      className={`${isFav ? "fas" : "far"} fa-heart`}
-      onClick={() => {
-        favHandler(props.meetUpId, !isFav);
-        setIsFav(prevState => !prevState);
-        if (props.favPageHandler) props.favPageHandler(props.meetUpId);
-      }}
+      className={`${props.isFav ? "fas" : "far"} fa-heart`}
+      onClick={toggleFavHandler}
     ></i>
   );
 }
