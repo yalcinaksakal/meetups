@@ -1,7 +1,3 @@
-//our-domain/
-
-//next js will detect MongoClien will be used on server side and wont import it on client side. Smart feature
-
 import MeetupList from "../components/meetups/MeetupList";
 import Head from "next/head";
 import { useSelector } from "react-redux";

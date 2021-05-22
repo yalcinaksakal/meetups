@@ -9,7 +9,9 @@ const meetupsSlice = createSlice({
   name: "meetups",
   initialState,
   reducers: {
-    addMeetup(state, action) {},
+    addMeetup(state, action) {
+      state.meetups.push(action.payload);
+    },
     toogleFav(state, action) {
       const index = state.meetups.findIndex(
         meetup => meetup._id === action.payload
@@ -22,12 +24,6 @@ const meetupsSlice = createSlice({
     },
   },
 });
-
-// id={meetup._id}
-// image={meetup.image}
-// title={meetup.title}
-// address={meetup.address}
-// isFav={meetup.isFav}
 
 export const meetupsSliceActions = meetupsSlice.actions;
 export default meetupsSlice.reducer;
