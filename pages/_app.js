@@ -28,6 +28,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Head>
+        <title>
+          Meetups
+        </title>
         <link rel="icon" href="/logo.png" />
         <link
           rel="stylesheet"

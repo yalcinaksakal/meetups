@@ -33,7 +33,7 @@ const NewMeetupPage = () => {
   ) : (
     <>
       <Head>
-        <title>Add a new meetup</title>
+        <title>Meetups-Add a new meetup</title>
         <meta name="description" content="Add a new meetup" />
       </Head>
       <NewMeetupForm onAddMeetup={addMeetupHandler} />
